@@ -1,0 +1,209 @@
+/* تصميم وحركات مشتركة لكل الصفحات. بيتحمّل بعد ستايل الصفحة، فبيعدّل عليه من غير ما يغيّر الهيكل */
+
+/* ---------- عام ---------- */
+/* الموبايل: مفيش سحب يمين وشمال للصفحة كلها (الجداول ليها سكرول خاص بيها) */
+html{overflow-x:hidden}
+.hi>*{min-width:0;max-width:100%}
+@media (max-width:760px){
+ .hi{padding:10px 12px;row-gap:8px}
+}
+/* التبويبات: من الموبايل لحد الشاشات المتوسطة بتبقى سطر لوحدها بيتسحب (كانت بتطلع بره الشاشة على التابلت واللابتوب الصغير) */
+@media (max-width:1180px){
+ .tabs{order:3;flex:1 0 100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);padding-inline:6px}
+ .tabs::-webkit-scrollbar{display:none}
+ .tabs button{flex:none;white-space:nowrap;padding:7px 14px}
+}
+/* الموبايل: شريط اللوحة كان بياكل نص الشاشة. بقى: الأدوات والخروج سطر واحد بيتسحب، والشريط كله بيختفي لما تنزل ويرجع لما تطلع (زي تطبيقات التواصل، ui.js) */
+@media (max-width:760px){
+ #app>.hd:has(>.hi){transition:transform .34s cubic-bezier(.2,.8,.2,1);will-change:transform}
+ html.hd-up #app>.hd:has(>.hi){transform:translateY(calc(-100% - 4px))}
+ #app>.hd .br small{display:none}#app>.hd .lg1{height:38px}#app>.hd .lg2{height:30px}#app>.hd h1{font-size:18px}
+ .hi>div:has(>.tools){flex:1 0 100%;flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;gap:8px!important}
+ .hi>div:has(>.tools)::-webkit-scrollbar{display:none}
+ .hi .tools{flex-wrap:nowrap}.hi .tools>*,.hi .tabs-out{flex:none}
+ /* أزرار كارت الطلب: شبكة عمودين منتظمة بدل 3 سطور مكسّرة */
+ .rq .rf{display:grid;grid-template-columns:1fr 1fr;padding:12px}.rq .rf>*{width:100%;margin:0;text-align:center;justify-content:center;padding-inline:8px;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .rq .rf>span.off{grid-column:1/-1}
+ .rq .kp .bt.s{padding:4px 10px!important;min-height:30px}
+}
+/* صفحة الفرع على الموبايل: شريط "أنت مسجّل الدخول في فرع" كان مضغوط (الاسم بيتكسر على 3 سطور). بقى: اسم الفرع سطر كامل، والأزرار تحته */
+@media (max-width:560px){
+ #me{flex-wrap:wrap;row-gap:10px}
+ #me>div:first-child{flex:1 0 100%;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+ #me>div:first-child small{display:inline}#me>div:first-child b{direction:ltr;unicode-bidi:isolate}
+ #me .tl{flex:1;justify-content:flex-end}
+}
+/* الموبايل: أزرار الورقة اللي تحت بقت سطر واحد بيتسحب، وزرار الإرسال ثابت أوله، بدل ما تغطي نص الشاشة */
+@media (max-width:560px){
+ .act{flex-wrap:nowrap;overflow-x:auto;gap:8px;padding:8px;margin-inline:-6px;border-radius:18px;scrollbar-width:none;
+  background:var(--card);background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:0 10px 28px rgba(0,0,0,.14),0 0 0 1px var(--line)}
+ .act::-webkit-scrollbar{display:none}
+ .act button.b{flex:none;white-space:nowrap;padding:11px 16px}
+ .act button.b.sd,.act button.b.p{position:sticky;inset-inline-start:0;z-index:1;box-shadow:0 0 0 6px var(--card)}
+}
+body{animation:ui-fade .45s ease both;-webkit-font-smoothing:antialiased}
+::selection{background:var(--ring)}
+input,select,textarea{transition:border-color .2s,box-shadow .2s,background-color .2s}
+button{transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .22s,background-color .22s,border-color .22s,color .22s,opacity .22s}
+button:not(:disabled):active{transform:scale(.97)}
+.b.p:not(:disabled):hover,.bt.p:not(:disabled):hover,.bt.g:not(:disabled):hover,.b.g:not(:disabled):hover,button.b.sd:not(:disabled):hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.16)}
+.tabs button.on{box-shadow:0 4px 14px rgba(212,174,92,.35)}
+.fl .chip{transition:background-color .2s,color .2s,border-color .2s,transform .16s}
+
+/* الكروت: رفعة خفيفة مع الماوس */
+.rq,.sc,.pan,.hist,#my,.auto{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+@media (hover:hover){
+ .rq:hover,.sc:hover,.pan:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.09)}
+}
+
+/* الهيدر: خط ذهبي بيلمع */
+.sheet>.hd{position:relative}
+/* (بالـ transform مش background-position: بيتحرك على كارت الشاشة من غير ما يعيد رسم الشريط كل فريم = أنعم على الموبايلات الضعيفة) */
+.hd{overflow-x:clip}
+.hd::after{content:"";position:absolute;left:0;width:35%;bottom:-3px;height:3px;pointer-events:none;will-change:transform;
+ background:linear-gradient(90deg,transparent,rgba(255,236,190,.95),transparent);animation:ui-sweep 7s ease-in-out infinite}
+
+/* طلب جديد: نبض هادي على الحالة */
+.rq.new .chp,.chp.new{animation:ui-glow 2.6s ease-in-out infinite}
+
+/* النوافذ المنبثقة */
+#md.on,#em.on,.mdl.on,.wkm.on{animation:ui-fade .22s ease both;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#md.on .mb,#em.on .eb,.mdl.on .card,.wkm.on .wkk{animation:ui-pop .38s cubic-bezier(.2,.9,.3,1.2) both}
+
+/* زرار "تنزيل الصورة" في ورقة الطلب */
+.ov a.b{display:inline-block;text-decoration:none;font:inherit;font-weight:700;border-radius:12px;padding:13px 22px;border:1.5px solid #d4ae5c;background:#d4ae5c;color:#1b1b1b}
+
+/* نافذة "فعّل الإشعارات" بنفس شكل نافذة التسجيل */
+#npm{display:none;position:fixed;inset:0;z-index:97;background:rgba(0,0,0,.55);overflow:auto;padding:18px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#npm.on{display:block;animation:ui-fade .22s ease both}
+#npm .uik{text-align:center}#npm .uik ol{text-align:right}#npm .uib{justify-content:center}
+#npm .bt{font:inherit;font-weight:700;border-radius:12px;padding:11px 20px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+#npm .bt.p{background:#d4ae5c;border-color:#d4ae5c;color:#1b1b1b}
+
+/* نافذة "افتح التسجيل في Firebase" */
+#uim{display:none;position:fixed;inset:0;z-index:98;background:rgba(0,0,0,.55);overflow:auto;padding:18px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#uim.on{display:block;animation:ui-fade .22s ease both}
+.uik{max-width:460px;margin:8vh auto;background:var(--card);color:var(--ink);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:ui-pop .38s cubic-bezier(.2,.9,.3,1.2) both}
+.uik .uii{font-size:40px;line-height:1}.uik h3{margin:8px 0 6px}.uik p{margin:0 0 8px;color:var(--mut)}
+.uik ol{margin:0 0 16px;padding-inline-start:20px;line-height:2}
+.uib{display:flex;gap:10px;flex-wrap:wrap}.uib .bt{text-decoration:none;display:inline-block}
+
+/* كارت الترحيب */
+.hello{position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+ background:linear-gradient(135deg,#1b1b1b 0%,#2b2416 100%);color:#fff;border-radius:20px;padding:18px 22px;margin-bottom:16px;
+ border:1px solid rgba(212,174,92,.3);box-shadow:0 14px 34px rgba(0,0,0,.14)}
+.hello::after{content:"";position:absolute;width:220px;height:220px;inset-inline-start:-60px;top:-110px;border-radius:50%;background:radial-gradient(circle,rgba(212,174,92,.28),transparent 70%);pointer-events:none}
+.hello .hl{position:relative;z-index:1;min-width:0}
+.hello b{font-size:21px;line-height:1.4;display:block}
+.hello p{margin:4px 0 0;color:#e2cf9e;font-size:14.5px}
+.hchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.hchips span{background:rgba(255,255,255,.07);border:1px solid rgba(212,174,92,.28);border-radius:999px;padding:4px 12px;font-size:13px;color:#f1efec}
+.hello .hc{position:relative;z-index:1;text-align:left;display:flex;flex-direction:column;align-items:flex-end}
+.hello .hc b{font-size:30px;line-height:1.1;color:#e8cf8a;font-variant-numeric:tabular-nums;direction:ltr}
+.hello .hc small{color:#b9b4aa;font-size:12.5px}
+#hello{display:none}.lock #hello{display:block}
+@media (max-width:560px){.hello{padding:16px}.hello b{font-size:18px}.hello .hc{flex-direction:row;align-items:baseline;gap:10px;flex-wrap:wrap;width:100%;border-top:1px solid rgba(255,255,255,.08);padding-top:8px}.hello .hc b{font-size:20px}}
+@media print{.hello,#hello{display:none!important}}
+.shot .hello,.shot #hello{display:none!important}
+
+/* فلتر الطلبات بالتاريخ: من / إلى */
+.drg{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.drg label{display:flex;align-items:center;gap:6px;color:var(--mut);font-size:13px;margin:0}
+.fl .drg input{margin-inline-start:0;padding:8px 10px}
+
+/* النت فاصل */
+.ui-offline .live{font-size:0;color:#ff9c8f}
+.ui-offline .live::after{content:"غير متصل";font-size:13px}
+.ui-offline .live i{background:#ef4444;animation:none;box-shadow:none}
+html.ui-offline::after{content:"⚠ النت فاصل — أول ما يرجع، الجديد هيظهر لوحده من غير ريفرش";position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:0;right:0;margin-inline:auto;z-index:95;
+ background:#3a1512;color:#fff;border:1px solid #c4362b;padding:10px 18px;border-radius:14px;font:500 14px/1.5 "IBM Plex Sans Arabic",Tahoma,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35);width:max-content;max-width:92vw;text-align:center;animation:ui-up .35s ease both}
+@media print{html.ui-offline::after{display:none}}
+
+/* الحد اليومي المجاني لـ Firebase خلص: النقطة البرتقالي + "متوقف مؤقتاً" بس (طلب محمد، نوفمبر 2026: من غير الشريط اللي فوق) */
+.ui-quota .live{font-size:0;color:#f6c770}
+.ui-quota .live::after{content:"متوقف مؤقتاً";font-size:13px}
+.ui-quota .live i{background:#f59e0b;animation:none;box-shadow:none}
+
+/* الإشعار العلوي */
+#toast{transition:transform .5s cubic-bezier(.2,.9,.3,1.25),border-color .3s,background-color .3s}
+
+/* ---------- شاشات الدخول ---------- */
+.ui-stage{background:#0b0b0b!important}
+/* التطبيق المثبّت: html.app ليه خلفية #1b1b1b، فخلفية شاشة الدخول كانت بتبان شريط على قد المحتوى بس (نوفمبر 2026) */
+html:has(body.ui-stage){background:#0b0b0b!important}
+.ui-stage::before,.ui-stage::after{content:"";position:fixed;pointer-events:none;z-index:0}
+.ui-stage::before{inset:-25%;
+ background:radial-gradient(38% 34% at 72% 28%,rgba(212,174,92,.22),transparent 70%),
+  radial-gradient(34% 30% at 26% 74%,rgba(29,138,153,.16),transparent 70%),
+  radial-gradient(24% 22% at 50% 50%,rgba(212,174,92,.07),transparent 70%);
+ animation:ui-drift 22s ease-in-out infinite alternate}
+.ui-stage::after{inset:0;
+ background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+ background-size:46px 46px;-webkit-mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%)}
+body.ui-stage #gate,.lg,.gc{position:relative;z-index:1}
+
+.ui-stage .lg,.ui-stage .gc,.ui-stage #gate .card{
+ background:rgba(22,22,22,.74);color:#f1efec;border:1px solid rgba(212,174,92,.22);border-radius:24px;overflow:hidden;
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+ box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05);
+ animation:ui-rise .75s cubic-bezier(.2,.8,.2,1) both}
+.ui-stage .lg::before,.ui-stage .gc::before,.ui-stage #gate .card::before{content:"";position:absolute;top:0;left:12%;right:12%;height:2px;
+ background:linear-gradient(90deg,transparent,#d4ae5c,transparent);opacity:.9}
+.ui-stage .lg>*,.ui-stage .gc>*,.ui-stage #gate .card>*{animation:ui-up .6s cubic-bezier(.2,.8,.2,1) both}
+.ui-stage .lg>:nth-child(1),.ui-stage .gc>:nth-child(1),.ui-stage #gate .card>:nth-child(1){animation:ui-pop .7s cubic-bezier(.2,.9,.3,1.25) .15s both,ui-float 5s ease-in-out 1s infinite}
+.ui-stage .lg>:nth-child(2),.ui-stage .gc>:nth-child(2),.ui-stage #gate .card>:nth-child(2){animation-delay:.25s}
+.ui-stage .lg>:nth-child(3),.ui-stage .gc>:nth-child(3),.ui-stage #gate .card>:nth-child(3){animation-delay:.32s}
+.ui-stage .lg>:nth-child(4),.ui-stage .gc>:nth-child(4),.ui-stage #gate .card>:nth-child(4){animation-delay:.39s}
+.ui-stage .lg>:nth-child(5),.ui-stage .gc>:nth-child(5),.ui-stage #gate .card>:nth-child(5){animation-delay:.46s}
+.ui-stage .lg>:nth-child(6),.ui-stage .gc>:nth-child(6),.ui-stage #gate .card>:nth-child(6){animation-delay:.53s}
+.ui-stage .lg>:nth-child(n+7),.ui-stage .gc>:nth-child(n+7),.ui-stage #gate .card>:nth-child(n+7){animation-delay:.6s}
+.ui-stage .lg img,.ui-stage .gc img,.ui-stage #gate .card img{filter:drop-shadow(0 8px 22px rgba(212,174,92,.28))}
+.ui-stage .lg p,.ui-stage .gc p,.ui-stage #gate .mut{color:#9d9a94}
+.ui-stage .lg input,.ui-stage .gc input,.ui-stage .gc select,.ui-stage #gate input{
+ background:rgba(255,255,255,.045);color:#f1efec;border:1.5px solid rgba(255,255,255,.09)}
+.ui-stage .lg input:focus,.ui-stage .gc input:focus,.ui-stage .gc select:focus,.ui-stage #gate input:focus{
+ border-color:#d4ae5c;background:rgba(255,255,255,.07);box-shadow:0 0 0 4px rgba(212,174,92,.18)}
+.ui-stage .gc select option{background:#1a1a1a;color:#f1efec}
+.ui-stage input::placeholder{color:#77736c}
+.ui-stage .er{color:#ff8a7a}
+
+/* زرار الدخول الذهبي + لمعة + مؤشر تحميل */
+.ui-stage .gc .go,.ui-stage .lg .bt.p,.ui-stage #gate .b.p{
+ position:relative;overflow:hidden;border:0;color:#1b1b1b;
+ background:linear-gradient(135deg,#ebcd84,#c49a3e);box-shadow:0 10px 26px rgba(212,174,92,.28)}
+.ui-stage .gc .go::before,.ui-stage .lg .bt.p::before,.ui-stage #gate .b.p::before{content:"";position:absolute;top:0;bottom:0;width:45%;left:-60%;
+ background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:ui-shine 3.8s ease-in-out 1.2s infinite}
+.ui-stage .gc .go:not(:disabled):hover,.ui-stage .lg .bt.p:not(:disabled):hover,.ui-stage #gate .b.p:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(212,174,92,.38)}
+.ui-stage .gc .go:disabled::after,.ui-stage .lg .bt.p:disabled::after,.ui-stage #gate .b.p:disabled::after{content:"";display:inline-block;width:15px;height:15px;margin-inline-start:10px;vertical-align:-2px;
+ border:2.5px solid rgba(27,27,27,.25);border-top-color:#1b1b1b;border-radius:50%;animation:ui-spin .7s linear infinite}
+
+/* ---------- الحركات ---------- */
+@keyframes ui-fade{from{opacity:0}to{opacity:1}}
+@keyframes ui-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes ui-rise{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes ui-pop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:none}}
+@keyframes ui-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ui-drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(3%,-2%) rotate(6deg)}100%{transform:translate(-3%,3%) rotate(-5deg)}}
+@keyframes ui-sweep{0%{transform:translateX(-110%)}60%,100%{transform:translateX(300%)}}
+@keyframes ui-shine{0%{left:-60%}35%,100%{left:130%}}
+@keyframes ui-spin{to{transform:rotate(360deg)}}
+@keyframes ui-glow{0%,100%{box-shadow:0 0 0 0 rgba(212,174,92,.45)}60%{box-shadow:0 0 0 7px rgba(212,174,92,0)}}
+
+/* اللي مفعّل "تقليل الحركة" في جهازه، أو وقت حفظ الصورة والطباعة */
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+.shot *,.shot *::before,.shot *::after{animation:none!important;transition:none!important}
+.shot .hd::after{display:none}
+@media print{
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ .hd::after,.ui-stage::before,.ui-stage::after{display:none!important}
+}
+
+/* الطباعة: خلفية الصفحة بيضاء دايماً (في التطبيق المثبّت خلفية الصفحة غامقة وكانت بتطلع سودا تحت الورقة وتخلّص الحبر) */
+@media print{html,html.app,html.aw,body{background:#fff!important}}
+
+/* الإشعار: الطلب اللي اتفتح من الإشعار بيلمع ثواني */
+.tzflash{animation:tzf 3.5s ease-out}@keyframes tzf{0%,65%{box-shadow:0 0 0 3px #d4ae5c,0 0 26px rgba(212,174,92,.65)}100%{box-shadow:0 0 0 0 transparent}}

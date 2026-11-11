@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<script src="./i18n.js"></script>
+<!-- شاشة البداية: خطوط لوجو تاسومة بترسم نفسها. ومحتوى الصفحة مخفي (aw) إلى ما نعرف مين داخل، علشان مايبانش حاجة قبل تسجيل الدخول -->
+<script>(function(){var h=document.documentElement;h.classList.add("aw");if(navigator.standalone||matchMedia("(display-mode: standalone)").matches)h.classList.add("app");setTimeout(function(){if(!h.classList.contains("aw"))return;var g=document.getElementById("gate");if(g&&!document.body.classList.contains("lock"))g.classList.add("on");h.classList.remove("aw");var b=document.getElementById("boot");if(b)b.remove()},10000)})()</script>
+<style>
+html.app{background:#1b1b1b}
+#boot{display:none}
+html.aw body>*:not(#boot){visibility:hidden!important}
+html.app #boot,html.aw #boot{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(55% 40% at 50% 45%,#2b2315 0%,#1b1b1b 70%);transition:opacity .5s ease,visibility .5s}
+#boot.out{opacity:0;visibility:hidden}
+#boot svg{width:136px;height:136px;overflow:visible;filter:drop-shadow(0 0 18px rgba(212,174,92,.25))}
+#boot .l{fill:none;stroke:#d4ae5c;stroke-width:5;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:bd .75s calc(var(--i)*55ms) cubic-bezier(.55,.1,.25,1) forwards,bl .5s 1.4s ease forwards}
+#boot .f{fill:#fff;fill-rule:evenodd;opacity:0;animation:bf .55s 1.15s ease forwards}
+#boot b{font:600 15px/1 Arial,Helvetica,sans-serif;color:#e8cf8a;letter-spacing:.05em;opacity:0;animation:bt .8s 1s ease forwards}
+#boot i{display:block;width:110px;height:2px;border-radius:2px;background:rgba(212,174,92,.18) linear-gradient(90deg,transparent,#d4ae5c,transparent) no-repeat;background-size:45% 100%;animation:bb 1.1s ease-in-out infinite}
+@keyframes bd{to{stroke-dashoffset:0}}
+@keyframes bl{to{stroke-opacity:.3}}
+@keyframes bf{to{opacity:1}}
+@keyframes bt{to{opacity:1;letter-spacing:.45em}}
+@keyframes bb{from{background-position:-60% 0}to{background-position:160% 0}}
+@media (prefers-reduced-motion:reduce){#boot *{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important}}
+@media print{#boot{display:none!important}}
+</style>
+<link rel="apple-touch-startup-image" href="./splash/splash-1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"><link rel="apple-touch-startup-image" href="./splash/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net https://*.workers.dev https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://*.google.com; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'self'">
+<link rel="manifest" href="./manifest-driver.json"><meta name="theme-color" content="#1b1b1b"><link rel="apple-touch-icon" href="./icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="referrer" content="strict-origin"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تطبيق السائق - تاسومة</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#efede9;--card:#fff;--ink:#1b1b1b;--mut:#6f6b64;--line:#e6e2db;--acc:#a8832f;--soft:#f6f2e9;--field:#f3f1ed;--ring:rgba(168,131,47,.22);--ok:#2f8f3e;--go:#6a56c9}
+@media (prefers-color-scheme:dark){:root{--bg:#0f0f0f;--card:#1a1a1a;--ink:#f1efec;--mut:#9d9a94;--line:#2f2f2f;--acc:#d4ae5c;--soft:#221f18;--field:#242424;--ring:rgba(212,174,92,.25);--ok:#5cc06c;--go:#a597ee}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "IBM Plex Sans Arabic",Tahoma,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+button,input,select{font:inherit;color:var(--ink)}
+input,select{width:100%;background:var(--field);border:1.5px solid transparent;border-radius:12px;padding:13px 14px}
+input:focus,select:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 4px var(--ring)}
+label{display:block;color:var(--mut);font-size:14px;margin:12px 0 4px}
+.hd{background:#1b1b1b;border-bottom:3px solid var(--acc);padding:10px 14px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
+.hd img{height:38px}.hd b{color:#fff;display:block;line-height:1.2}.hd small{color:#cdb67a}
+.hd .sp{flex:1}.hd button{background:none;border:1.5px solid #444;color:#ddd;border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+/* الجوال: الشريط كان أعرض من الشاشة (الصفحة كانت بتتسحب يمين وشمال). السطر الأول: اللوجو والاسم والخروج، والتاني: اللغة والإشعارات والرسائل */
+@media (max-width:520px){
+ .hd{flex-wrap:wrap;row-gap:8px}.hd::before{content:"";order:4;flex-basis:100%;height:0}
+ .hd #out{order:3}.hd [data-tzl-slot],.hd #bell,.hd #bcme,.hd [data-install]{order:5}
+ .hd [data-tzl-slot]~*{flex:none}
+ /* كارت التوصيلة: زرار الأصناف تحت، علشان اسم الفرع وخانة الكراتين ياخدوا العرض كله */
+ .pick{flex-wrap:wrap}.pick>span{flex:1 1 calc(100% - 50px)!important;min-width:0}.pick>button{margin-inline-start:36px}
+ .ctn small{flex:1;min-width:0;line-height:1.5}
+}
+main{max-width:560px;margin:0 auto;padding:14px 14px 80px}
+.card{background:var(--card);border-radius:18px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.card h3{margin:0 0 6px;font-size:18px}
+.b{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:14px 18px;font-weight:700;cursor:pointer;width:100%}
+.b.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}.b.g{background:var(--acc);border-color:var(--acc);color:#1b1b1b}.b.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.b:disabled{opacity:.5}.row{display:flex;gap:10px;margin-top:12px}.row .b{flex:1}
+.stop{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.stop.done{background:var(--soft);border-color:var(--ok)}.stop b{font-size:19px;direction:ltr;display:inline-block}.stop small{display:block;color:var(--mut)}
+.stop .b{width:auto;padding:11px 14px;white-space:nowrap}
+.pick{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer}.pick input{width:24px;height:24px;flex:none}
+.ctn{display:flex;gap:8px;align-items:center;margin-top:8px}.ctn small{margin:0!important;color:var(--mut)}.ctn input{width:84px!important;height:42px!important;font-size:18px;text-align:center;border:1.5px solid var(--line);border-radius:10px;padding:0 6px}
+.pill{border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;background:#e4def7;color:#44348a}
+.kp{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.kp span{background:var(--soft);border-radius:10px;padding:4px 12px;font-size:15px}
+.mut{color:var(--mut);font-size:14px}.er{color:#c4362b;min-height:22px;font-size:15px;margin-top:8px}
+#gate{max-width:380px;margin:10vh auto;padding:0 18px;text-align:center}#gate .card{padding:26px 22px}#gate img{height:62px;background:#1b1b1b;padding:10px 16px;border-radius:14px}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-140px);z-index:80;background:#1b1b1b;color:#fff;padding:12px 22px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.3);transition:.35s;border:1px solid var(--acc);max-width:92vw;text-align:center}#toast.on{transform:translateX(-50%) translateY(0)}#toast.er{border-color:#c4362b}
+.b.it{width:auto;padding:5px 12px;font-size:13px;font-weight:500;margin-top:6px}
+.itg{border:1.5px solid var(--line);border-inline-start:5px solid var(--acc);border-radius:12px;padding:8px 12px;margin-bottom:8px}.itg>b{font-size:17px;display:block}
+.itr{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-top:1px dashed var(--line)}.itr b{font-size:18px}
+.mdl{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);overflow:auto;padding:16px}.mdl.on{display:block}.mdl .card{max-width:480px;margin:6vh auto}
+</style>
+<link rel="stylesheet" href="./ui.css"><script src="./ui.js" defer></script>
+</head>
+<body>
+<div id="boot" aria-hidden="true"><svg viewBox="0 0 512 512"><path class="f" d="M139.5 87L142.5 88L175.5 130L129 212.5ZM370.5 87L373.5 87L374.5 94L384.5 211L383 213.5L336.5 130ZM197.5 135L314.5 135L314.5 138L249.5 219L250.5 273L259 275.5L262.5 270L262.5 221L269 214.5L305.5 306L290 344.5L267.5 334L281.5 318L282.5 307L268 292.5L262 289.5L247 290.5L230.5 305L230.5 318L244.5 334L225 343.5L222 343.5L219.5 340L206.5 305L242.5 217L247.5 199ZM327.5 141L330.5 143L352 184.5L320 171.5L297.5 179ZM183.5 142L188.5 145L215 179.5L192 171.5L160.5 184ZM192.5 185L233.5 201L232.5 209L211 261.5L201 257.5L175.5 240L154.5 202ZM315.5 186L327 187.5L357 200.5L357.5 203L335.5 242L303 262.5L299.5 259L278.5 202ZM192.5 203L199 202.5L205.5 213L212.5 230L209 237.5L202 236.5L173.5 217L173.5 212L177 208.5ZM312.5 203L326 204.5L335 208.5L339.5 215L334 221.5L320 230.5L308 237.5L304 237.5L300.5 235L299.5 230ZM144.5 213L150.5 219L164.5 244L164.5 248L128.5 308L126 308.5L125.5 247ZM365.5 213L368.5 213L386.5 246L386 308.5L347.5 248ZM174.5 256L205.5 275L194.5 302L194.5 311L214.5 358L249.5 387L249 425.5L165 374.5L127.5 333ZM334.5 257L340.5 259L384.5 334L345 376.5L263 425.5L262.5 387L299.5 356L318.5 309L307.5 274ZM254.5 343L281.5 355L257 375.5L231.5 356L232 353.5Z"/><path class="l" pathLength="1" style="--i:0" d="M139.5 87L142.5 88L175.5 130L129 212.5Z"/><path class="l" pathLength="1" style="--i:1" d="M370.5 87L373.5 87L374.5 94L384.5 211L383 213.5L336.5 130Z"/><path class="l" pathLength="1" style="--i:2" d="M197.5 135L314.5 135L314.5 138L249.5 219L250.5 273L259 275.5L262.5 270L262.5 221L269 214.5L305.5 306L290 344.5L267.5 334L281.5 318L282.5 307L268 292.5L262 289.5L247 290.5L230.5 305L230.5 318L244.5 334L225 343.5L222 343.5L219.5 340L206.5 305L242.5 217L247.5 199Z"/><path class="l" pathLength="1" style="--i:3" d="M327.5 141L330.5 143L352 184.5L320 171.5L297.5 179Z"/><path class="l" pathLength="1" style="--i:4" d="M183.5 142L188.5 145L215 179.5L192 171.5L160.5 184Z"/><path class="l" pathLength="1" style="--i:5" d="M192.5 185L233.5 201L232.5 209L211 261.5L201 257.5L175.5 240L154.5 202Z"/><path class="l" pathLength="1" style="--i:6" d="M315.5 186L327 187.5L357 200.5L357.5 203L335.5 242L303 262.5L299.5 259L278.5 202Z"/><path class="l" pathLength="1" style="--i:7" d="M192.5 203L199 202.5L205.5 213L212.5 230L209 237.5L202 236.5L173.5 217L173.5 212L177 208.5Z"/><path class="l" pathLength="1" style="--i:8" d="M312.5 203L326 204.5L335 208.5L339.5 215L334 221.5L320 230.5L308 237.5L304 237.5L300.5 235L299.5 230Z"/><path class="l" pathLength="1" style="--i:9" d="M144.5 213L150.5 219L164.5 244L164.5 248L128.5 308L126 308.5L125.5 247Z"/><path class="l" pathLength="1" style="--i:10" d="M365.5 213L368.5 213L386.5 246L386 308.5L347.5 248Z"/><path class="l" pathLength="1" style="--i:11" d="M174.5 256L205.5 275L194.5 302L194.5 311L214.5 358L249.5 387L249 425.5L165 374.5L127.5 333Z"/><path class="l" pathLength="1" style="--i:12" d="M334.5 257L340.5 259L384.5 334L345 376.5L263 425.5L262.5 387L299.5 356L318.5 309L307.5 274Z"/><path class="l" pathLength="1" style="--i:13" d="M254.5 343L281.5 355L257 375.5L231.5 356L232 353.5Z"/></svg><b>TASOOMA</b><i></i></div>
+<div id="toast"></div>
+<div id="gate"><div class="card"><div class="tzl-row"><span data-tzl-slot></span></div><img src="./icon-192.png" alt=""><h2 style="margin:10px 0 2px">تطبيق السائق</h2><p class="mut" style="margin:0 0 12px">سجّل دخولك لتبدأ الرحلة</p>
+<input id="gu" placeholder="اسم المستخدم (مثلاً drv1)" autocomplete="username" autocapitalize="none" dir="ltr" style="text-align:center"><div style="height:10px"></div><input id="gp" type="password" placeholder="كلمة المرور" autocomplete="current-password" style="text-align:center"><div style="height:12px"></div><button class="b p" id="gg" type="button">دخول</button><div class="er" id="ge"></div></div></div>
+<div id="app" hidden><div class="hd"><img src="./icon-192.png" alt=""><div><b id="nm"></b><small>سائق التوصيل</small></div><div class="sp"></div><span data-tzl-slot></span><button id="bell" type="button"></button><button data-install type="button" hidden>📲</button><button id="out" type="button">خروج</button></div><main id="mn"></main></div>
+<div class="mdl" id="md"></div>
+<script type="module">
+import {makeFb,pushRegister,pushSave,ping,emailOf,withTimeout,failReason,FAIL_MSG,collection,doc,getDoc,addDoc,updateDoc,setDoc,onSnapshot,query,where,writeBatch,signInWithEmailAndPassword,signOut,onAuthStateChanged} from "./fb.js";
+import {wireButtons,regSW,notify,beep,autoPush} from "./notify.js";
+import {shrink} from "./cust.js";
+import {initBChat,stopBChat,openBr} from "./bchat.js";
+// قائمة الفروع (نفس اللي في admin.html و index.html و sheet.html): للشات مع الفروع
+const BRL=["002-BAHA","003-EL MALQA","004-GERNATA","005-EL MADAR","006-KING ABDALLA","007-EL RABYE","008-ELEZDHAR","009-Z LABAN","010-EL ROWPY","011-EL SADA","012-BRANCH","013-ABHA CITY","014-RAFAL PLAZA","015-ONLINE","017-ELQASEEM","019-EL AQEQ","021-HAMDANIA","022-HAFAR AL BATIN","023-Al Ahsa","024-JED-AlSamer","027-HAIL","028-KHAMIS MUSHAIT","029-ALAJAWEED","030-TABUK","031-KHOBAR","032-JIZAN","033-SUWAIDI","034-DAREEN MALL"];
+const {app,db,auth}=makeFb("drv");
+const g=id=>document.getElementById(id);
+const E=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=x=>Number.isFinite(+x)?+x:0;
+let SHIPS={};const shipOf=x=>!x.fr&&!(x.tr&&x.tr.fr)&&SHIPS[codeOf(x.brn)]||"";// اسم شركة الشحن لو الطلب/المحطة لفرع خارج الرياض (التحويل بين الفروع مش شحن)
+const toEn=s=>String(s||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/٫/g,".").replace(/[٬,]/g,"");
+const hm=t=>new Date(N(t)).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+const dur=ms=>{const m=Math.max(0,Math.round(N(ms)/60000)),h=Math.floor(m/60);return h?`${h}س ${m%60}د`:`${m}د`};
+const today=()=>new Date().toLocaleDateString("en-CA");
+const codeOf=b=>String(b||"").split("-")[0];
+const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+// عدد الكراتين لكل طلب (اختياري): بيتكتب قبل الرحلة أو أثناءها، ويتحفظ على الرحلة (stops[].ct)
+const CT=(()=>{try{return JSON.parse(lsGet("drv_ct")||"{}")||{}}catch(e){return {}}})(),ctSave=()=>{const k=Object.keys(CT);if(k.length>200)k.slice(0,k.length-200).forEach(x=>delete CT[x]);lsSet("drv_ct",JSON.stringify(CT))},ctV=v=>{const n=Math.round(N(toEn(String(v||""))));return n>0?Math.min(9999,n):0};
+const ctBox=(rid,sh,v)=>`<div class="ctn" onclick="if(event.target.tagName!=='INPUT')event.preventDefault()"><small>📦 ${sh?"عدد الكراتين لشركة الشحن":"عدد الكراتين للفرع"} (اختياري)</small><input data-ct="${E(rid)}" inputmode="numeric" autocomplete="off" placeholder="0" value="${v?E(v):""}"></div>`;
+let me=null,CARS=[],REQ=[],TR=[],FU=[],GEO={br:{},wh:null},un=[],off=new Set(),odoV=null,tt,tick=null;
+const toast=(m,er)=>{const t=g("toast");t.textContent=m;t.className="on"+(er?" er":"");clearTimeout(tt);tt=setTimeout(()=>t.className="",er?5000:3200)};
+const ERR=c=>({"auth/invalid-credential":"اسم المستخدم أو كلمة المرور غير صحيحة","auth/user-disabled":"الحساب معطّل. تواصل مع المستودع.","auth/too-many-requests":"محاولات كثيرة، انتظر قليلاً","auth/network-request-failed":"لا يوجد اتصال بالإنترنت","auth/invalid-email":"اسم المستخدم غير صحيح"}[c]||"تعذر الدخول، حاول مجدداً.");
+const active=()=>TR.find(t=>t.st==="active");
+// لما الحفظ يفشل نقول السبب الحقيقي (الحد اليومي لـ Firebase / لا يوجد نت / بطء)
+const fail=async(e,deny)=>{const w=await failReason(e);toast(w==="denied"?deny:FAIL_MSG[w],"er")};
+// ---------- موقع لحظي (عند الضغط فقط، من غير تتبع في الخلفية) ----------
+const here=()=>new Promise(r=>{if(!("geolocation" in navigator))return r(null);navigator.geolocation.getCurrentPosition(p=>r({lat:+p.coords.latitude.toFixed(5),lng:+p.coords.longitude.toFixed(5)}),()=>r(null),{enableHighAccuracy:true,timeout:9000,maximumAge:0})});
+const km2=(a,b)=>{const R=6371,t=x=>x*Math.PI/180,dl=t(b.lat-a.lat),dn=t(b.lng-a.lng),h=Math.sin(dl/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+// ترتيب أقرب فرع فأقرب (لو مواقع الفروع معروفة)
+function order(rs,from){
+ const ok=rs.filter(r=>GEO.br[codeOf(r.brn)]),no=rs.filter(r=>!GEO.br[codeOf(r.brn)]);
+ let cur=from||GEO.wh;if(!cur||!ok.length)return rs.slice();
+ const left=ok.slice(),out=[];
+ while(left.length){let bi=0,bd=1e9;left.forEach((r,i)=>{const d=km2(cur,GEO.br[codeOf(r.brn)]);if(d<bd){bd=d;bi=i}});const r=left.splice(bi,1)[0];out.push(r);cur=GEO.br[codeOf(r.brn)]}
+ return out.concat(no);
+}
+// ---------- وقت الوصول المتوقع لكل فرع ----------
+// كل رحلة قصيرة: الوقت الفعلي من رحلات قبل كده لنفس "من فين لفين" (المستودع←الملقا غير غرناطة←الملقا)،
+// ولو أول مرة: من المسافة (خط مستقيم × 1.3 بسرعة 35 كم/س) + 5 دقائق تسليم.
+// أول رحلة قصيرة بيتحسب من مكان السائق الحقيقي (GPS)، إلا لو هو لا يزال في المستودع (أقل من كيلو) فبنستخدم وقت المستودع.
+// التحويل اللي لا يزال ما استلمهوش: بيعدّي على الفرع اللي هيستلم منه الأول (+10 دقائق تحميل بدل 5 تسليم).
+const SPD=35,STOP=5,PICK=10;
+function legMin(prev,code,from){
+ if(prev){const pr=GEO.pairs&&GEO.pairs[prev+">"+code];if(pr)return pr}
+ const a=from||(prev==="WH"?GEO.wh:prev?GEO.br[prev]:null),b=GEO.br[code];if(a&&b)return km2(a,b)*1.3/SPD*60+STOP;
+ return b&&b.avg?b.avg:null;
+}
+// list = التوصيلات بالترتيب، t0 = بداية الحساب، prev = كود المكان اللي هو فيه (WH أو فرع)، pt = مكانه بالـ GPS لو معروف
+function etas(list,t0,prev="WH",pt=null){
+ if(pt&&GEO.wh&&km2(pt,GEO.wh)<1){prev="WH";pt=null}
+ let t=t0,cur=pt;const o={};
+ for(const x of list){
+  if(x.fr&&!x.pk){const m=legMin(cur?null:prev,x.fr,cur);if(!m)break;t+=(m-STOP+PICK)*6e4;prev=x.fr;cur=null}
+  const c=codeOf(x.brn),m=legMin(cur?null:prev,c,cur);if(!m)break;t+=m*6e4;o[x.rid||x.id]=Math.round(t);prev=c;cur=null;
+ }
+ return o;
+}
+// ---------- تحديث الوقت المتوقع أثناء الرحلة (طول ما التطبيق مفتوح قدامه) ----------
+// كل 3 دقائق أو كل ما يتحرك كيلو: بنحدّث مكانه على الرحلة والوقت المتوقع لكل فرع لا يزال ماوصلهوش.
+// لما يبقى قرب فرع (10 دقائق أو أقل، أو أقل من كيلو ونص): near على الطلب ← السيرفر يبعت للفرع "اقترب السائق من الوصول إليك" مرة واحدة.
+// المتصفح مش بيدّي الموقع والتطبيق في الخلفية، فبنأبقِ الشاشة مضاءة أثناء الرحلة (لو السائق سايبها مفعّلة).
+const LIVE={w:null,last:0,lastPt:null,busy:false,lock:null};
+const wakeOn=()=>lsGet("drv_wake")!=="0";
+async function wake(){try{if(wakeOn()&&!LIVE.lock&&"wakeLock" in navigator&&document.visibilityState==="visible"){LIVE.lock=await navigator.wakeLock.request("screen");LIVE.lock.addEventListener("release",()=>{LIVE.lock=null})}}catch(e){}}
+function liveOn(){
+ const a=active();if(bgOn(a)||NAT){if(LIVE.lock){LIVE.lock.release().catch(()=>{});LIVE.lock=null}}else wake();// التتبع في الخلفية شغّال: مش محتاجين الشاشة منورة
+ if(LIVE.w!==null||!("geolocation" in navigator))return;
+ LIVE.w=navigator.geolocation.watchPosition(p=>onPos({lat:+p.coords.latitude.toFixed(5),lng:+p.coords.longitude.toFixed(5)}),()=>{},{enableHighAccuracy:true,maximumAge:30000,timeout:30000});
+}
+function liveOff(){if(LIVE.w!==null){navigator.geolocation.clearWatch(LIVE.w);LIVE.w=null}if(LIVE.lock){LIVE.lock.release().catch(()=>{});LIVE.lock=null}LIVE.last=0;LIVE.lastPt=null}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&active()&&!bgOn(active())&&!NAT)wake()});
+// ---------- تتبع السائق في الخلفية ----------
+// أندرويد: تطبيق TASOOMA للسائقين (driver-app، الملف tasooma-driver.apk) بيفتح الصفحة دي جوّاه، وبيدّيها window.TasoomaApp:
+//   state() = on/off/noperm/nogps · start(رمز) = يبدأ يبعت المكان والجوال مقفول · stop() · fix() = إذن الموقع / تشغيل الـ GPS · pushToken() = رقم الجهاز للإشعارات
+//   والتطبيق بينادي window.__natState() لما الحالة تتغيّر، و window.__natTok(رقم) لما رقم الإشعارات يجهز.
+// آيفون: تطبيق Traccar Client بنفس الرمز السري (drivers/{id}.gps).
+const GPS_URL="https://tasooma-push.tasooma.workers.dev/gps";
+const NAT=window.TasoomaApp||null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent),DROID=/android/i.test(navigator.userAgent);
+// ملف التطبيق على GitHub Releases (رفع ملفات كبيرة من صفحة الرفع العادية بيفشل). "latest" = آخر نسخة دايماً
+const APK_URL="https://github.com/mhmadrgab/TASOOMA-ORDER/releases/latest/download/tasooma-driver.apk";
+const natSt=()=>{try{return NAT?String(NAT.state()||""):""}catch(e){return ""}};
+// رمز التتبع: لو السائق مالوش رمز بيعمله لنفسه مرة واحدة (القواعد بتسمحله بده بس)
+const GA="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+let gpsTried=false,trLoaded=false,natBusy=false,natAt=0;
+async function ensureGps(){
+ if(!me)return "";if(me.gps)return me.gps;if(gpsTried)return "";gpsTried=true;
+ try{
+  const d=await withTimeout(getDoc(doc(db,"drivers",me.id)),12000),cur=d.exists()?String(d.data().gps||""):"";
+  const tok=cur||[...crypto.getRandomValues(new Uint32Array(32))].map(x=>GA[x%GA.length]).join("");
+  if(!cur)await withTimeout(updateDoc(doc(db,"drivers",me.id),{gps:tok}),15000);
+  me.gps=tok;lsSet("drv_me",JSON.stringify(me));return tok;
+ }catch(e){return ""}
+}
+// التطبيق: فيه رحلة جارية ← يشغّل التتبع، لا يوجد ← يوقفه (بعد ما الرحلات تتقري من Firebase بس)
+async function natSync(){
+ if(!NAT||!me||!trLoaded||natBusy)return;
+ const a=active(),s=natSt();
+ try{
+  if(!a){if(s==="on")NAT.stop();natAt=0;return}
+  if(s!=="off"||Date.now()-natAt<30000)return;// شغّال خلاص، أو محتاج إذن/GPS (الزرار في الكارت)، أو لا يزال طالبينه من شوية
+  natBusy=true;const tok=await ensureGps();natBusy=false;
+  // لو ماشتغلش (نادراً)، نحاول مجدداً بعد 30 ثانية
+  if(tok&&active()){natAt=Date.now();NAT.start(tok);setTimeout(()=>{if(active()&&natSt()==="off")draw()},31000)}
+ }catch(e){natBusy=false}
+}
+window.__natState=()=>{natSync();draw()};
+const natFix=s=>s==="noperm"||s==="nogps"?`<div class="mut" style="color:#c4362b;font-weight:700;margin-top:6px">⚠️ ${s==="noperm"?"يحتاج التطبيق إلى إذن الموقع":"الموقع (GPS) مغلق في الجوال"} لتعرف الفروع موعد وصولك</div><button class="b g" data-nfix type="button" style="margin-top:8px">📍 ${s==="noperm"?"اسمح بالموقع":"فعّل الموقع"}</button>`:"";
+const natLine=()=>{const s=natSt();return s==="on"?`<div class="mut" style="color:#1f8a3c;font-weight:700">📡 التتبع يعمل ✅ يصل مكانك تلقائياً حتى والجوال مغلق، وتعرف الفروع موعد وصولك.</div>`
+ :natFix(s)||`<div class="mut">⏳ نشغّل التتبع...</div>`};
+const wireNat=el=>el.querySelectorAll("[data-nfix]").forEach(b=>b.onclick=()=>{try{NAT.fix()}catch(e){}});
+const gpsCard=()=>{
+ if(NAT){const f=natFix(natSt());return f?`<div class="card">${f}</div>`:""}
+ if(DROID)return `<details class="card"><summary style="cursor:pointer;font-weight:800">📲 نزّل تطبيق TASOOMA للسائقين (مهم)</summary>
+ <div class="mut" style="margin:8px 0">نزّله مرة واحدة وادخل بنفس اسم المستخدم وكلمة المرور: يصل مكانك للفروع تلقائياً وأنت في رحلة <b>حتى والجوال في جيبك</b>، وتصلك الإشعارات والتطبيق مغلق، ومن دون أي إعدادات.</div>
+ <a class="b g" style="display:block;text-align:center;text-decoration:none" href="${E(APK_URL)}">⬇️ نزّل التطبيق</a><div class="mut" style="margin-top:6px">إن سألك الجوال، اسمح بالتثبيت من هذا المصدر.</div></details>`;
+ return me&&me.gps?`<details class="card"><summary style="cursor:pointer;font-weight:800">📡 تطبيق التتبع (لتعرف الفروع موعد وصولك)</summary>
+ <div class="mut" style="margin:8px 0">ثبّته مرة واحدة فقط، وهو يرسل مكانك للمنصة وأنت في رحلة حتى والجوال مغلق، فلا حاجة لإبقاء هذا التطبيق مفتوحاً.</div>
+ <ol class="mut" style="padding-inline-start:18px;line-height:1.9;margin:0"><li>نزّل <b>Traccar Client</b> من App Store (مجاناً)</li><li>افتحه واكتب:<br>Device identifier: <b dir="ltr">${E(me.gps)}</b> <button class="b it" data-cpy="${E(me.gps)}" type="button">نسخ</button><br>Server URL: <b dir="ltr" style="word-break:break-all">${GPS_URL}</b> <button class="b it" data-cpy="${GPS_URL}" type="button">نسخ</button><br>Frequency: <b>20</b></li><li>شغّل <b>Service status</b></li><li>اسمح بالموقع <b>طوال الوقت (Always)</b></li></ol></details>`:"";
+};
+const wireCpy=el=>el.querySelectorAll("[data-cpy]").forEach(b=>b.onclick=async e=>{e.preventDefault();try{await navigator.clipboard.writeText(b.dataset.cpy);toast("تم النسخ ✅")}catch(x){prompt("انسخ:",b.dataset.cpy)}});
+// تطبيق التتبع في الخلفية (Traccar Client) بيبعت مكانه للسيرفر؟ (آخر مكان من "bg" من أقل من 5 دقائق)
+const bgOn=a=>!!(a&&a.loc&&a.loc.src==="bg"&&Date.now()-N(a.loc.ts)<5*6e4);
+async function onPos(pt){
+ const a=active();if(!a||LIVE.busy||bgOn(a))return;const now=Date.now();// التتبع في الخلفية شغّال: السيرفر بيحسب لوحده
+ if(now-LIVE.last<3*6e4&&(LIVE.lastPt?km2(LIVE.lastPt,pt):99)<1)return;
+ LIVE.busy=true;LIVE.last=now;LIVE.lastPt=pt;
+ try{
+  const pend=(a.stops||[]).filter(s=>!s.arr),et=etas(pend,now,null,pt),near=[];
+  const b=writeBatch(db);
+  // (مابنلمسش stops هنا علشان مانتخانقش مع "وصلت وسلّمت" لو حصلوا في نفس اللحظة: الوقت بيتكتب على الطلب نفسه)
+  b.update(doc(db,"trips",a.id),{loc:{...pt,ts:now}});
+  pend.forEach(s=>{const r=REQ.find(x=>x.id===s.rid);if(!r||r.st!=="go")return;const e=et[s.rid];
+   if(e&&Math.abs(e-N(r.eta))>=3*6e4)b.update(doc(db,"requests",s.rid),{eta:e});// (من غير upd، وكل 3 دقايق فرق: توفير قراءات)
+   const bp=GEO.br[codeOf(s.brn)],close=(e&&e-now<=10*6e4)||(bp&&km2(pt,bp)<1.5);
+   if(close&&!shipOf(s)&&!(s.fr&&!s.pk)&&!(N(r.near)>N(r.dep)))near.push(s.rid)});
+  await withTimeout(b.commit(),15000);
+  // "اقترب من الوصول" لوحده (لو القواعد لا يزال قديمة، الوقت المتوقع يفضل يتحدّث عادي)
+  for(const rid of near){try{await withTimeout(updateDoc(doc(db,"requests",rid),{near:now}),15000);ping(auth,[rid])}catch(e){}}
+ }catch(e){}finally{LIVE.busy=false}
+}
+// التحويل اللي لا يزال ما استلمهوش: الفرع اللي هيستلم منه بيدخل في المسار قبل الفرع اللي هيسلّمله
+const mapLink=list=>{const pts=list.flatMap(x=>[x.fr&&!x.pk?GEO.br[x.fr]:null,GEO.br[codeOf(x.brn)]]).filter(Boolean);if(!pts.length)return "";const d=pts[pts.length-1],w=pts.slice(0,-1).map(p=>p.lat+","+p.lng).join("|");return `https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}${w?"&waypoints="+encodeURIComponent(w):""}&travelmode=driving`};
+// ---------- دخول ----------
+g("gg").onclick=async()=>{
+ const u=g("gu").value.trim().toLowerCase(),p=g("gp").value;g("ge").textContent="";
+ if(!/^drv\d{1,2}$/.test(u)||!p){g("ge").textContent="اكتب اسم المستخدم (drv1) وكلمة المرور";return}
+ g("gg").disabled=true;
+ try{await withTimeout(signInWithEmailAndPassword(auth,emailOf(u),p),15000)}catch(x){g("ge").textContent=x&&x.message==="timeout"?"الاتصال بطيء، حاول مجدداً":ERR(x&&x.code)}
+ g("gg").disabled=false;
+};
+g("gp").addEventListener("keydown",e=>{if(e.key==="Enter")g("gg").click()});
+g("out").onclick=()=>{const a=active();if(a&&!confirm("لديك رحلة جارية. هل تريد الخروج؟ (ستبقى الرحلة مفتوحة)"))return;signOut(auth)};
+onAuthStateChanged(auth,u=>check(u));
+async function check(u){
+ if(!u){stopAll();stopBChat();g("app").hidden=true;g("gate").hidden=false;window.uiReady&&uiReady();return}
+ const id=(u.email||"").split("@")[0];
+ if(!/^drv\d{1,2}$/.test(id)){await signOut(auth);g("ge").textContent="حساب غير صالح لهذه الصفحة";return}
+ try{
+  const d=await withTimeout(getDoc(doc(db,"drivers",id)),12000);
+  if(!d.exists()||d.data().enabled!==true){await signOut(auth);g("ge").textContent="الحساب معطّل. تواصل مع المستودع.";return}
+  me={id,name:String(d.data().name||id),gps:String(d.data().gps||"")};lsSet("drv_me",JSON.stringify(me));gpsTried=false;
+ }catch(e){
+  if(e&&e.code==="permission-denied"){await signOut(auth);g("ge").textContent="الحساب معطّل. تواصل مع المستودع.";return}
+  if(auth.currentUser!==u)return;
+  // لا يوجد نت: الدخول محفوظ، فمش بنخرّجه. لو دخل من الجهاز ده قبل كده بنكمّل باسمه، وإلا بنستنى النت
+  let c=null;try{c=JSON.parse(lsGet("drv_me")||"null")}catch(x){}
+  if(c&&c.id===id)me=c;
+  else{g("app").hidden=true;g("gate").hidden=false;g("ge").textContent="📡 لا يوجد اتصال بالإنترنت. دخولك محفوظ، وسنحاول مجدداً تلقائياً...";window.uiReady&&uiReady();
+   setTimeout(()=>{if(auth.currentUser===u)check(u)},8000);return}
+ }
+ g("gate").hidden=true;g("app").hidden=false;g("nm").textContent=me.name;wireButtons();startAll();window.uiReady&&uiReady();
+ // الدردشة الخاص: السائق يتواصل مع المستودع والفروع (زرار 💬 عائم + زرار فوق). كل محادثة بين طرفين بس
+ initBChat({db,app,party:"d-"+me.id,codes:BRL,name:()=>me.name,myLabel:()=>me.name,brn:c=>BRL.find(b=>codeOf(b)===c)||c,toast,beep,notify,ping:c=>ping(auth,[],[c]),
+  visible:()=>{const m=g("bcm");return !!(m&&m.classList.contains("on"))}});
+ {const qc=(q=>/^g_/.test(q)?q:q.toLowerCase())(String(new URLSearchParams(location.search).get("chat")||""));if(/^([bdw]-.|g_.)/.test(qc)){setTimeout(()=>openBr(qc),900);try{history.replaceState(null,"",location.pathname)}catch(e){}}}
+ if(NAT){// جوه تطبيق TASOOMA: الإشعارات من التطبيق نفسه (رقمه بيتسجّل باسم السائق)
+  const save=t=>{if(t&&me&&auth.currentUser)pushSave(db,{role:"driver",key:me.id,email:auth.currentUser.email},String(t)).catch(()=>{})};
+  window.__natTok=save;try{save(NAT.pushToken())}catch(e){}
+ }else{window.__push=()=>pushRegister(app,db,{role:"driver",key:me.id,email:u.email});autoPush()}// إشعارات الجوال للسائق
+}
+let firstReq=true;
+function startAll(){
+ stopAll();firstReq=true;
+ un.push(onSnapshot(collection(db,"cars"),sn=>{CARS=sn.docs.map(d=>({id:d.id,...d.data()})).filter(c=>c.active!==false);draw()},()=>toast("تعذر قراءة السيارات","er")));
+ // الفروع اللي خارج الرياض (ship/main = {c:{كود الفرع: اسم شركة الشحن}}): السائق بيسلّمها لشركة الشحن مش للفرع
+ un.push(onSnapshot(doc(db,"ship","main"),d=>{const v=d.exists()&&d.data().c;SHIPS=v&&typeof v==="object"?v:{};draw()},()=>{}));
+ un.push(onSnapshot(doc(db,"geo","main"),d=>{const v=d.exists()?d.data():null;GEO={br:(v&&v.br&&typeof v.br==="object")?v.br:{},wh:v&&v.wh||null,pairs:(v&&v.pairs&&typeof v.pairs==="object")?v.pairs:{}};draw()},()=>{}));
+ // توفير القراءات: السائق محتاج بس الطلبات اللي لا يزال عنده (قيد التجهيز / في الطريق)، مش كل اللي سلّمه من أول يوم
+ un.push(onSnapshot(query(collection(db,"requests"),where("asg.drv","==",me.id),where("st","in",["prep","go"])),sn=>{
+  const old=new Set(REQ.map(r=>r.id));
+  REQ=sn.docs.map(d=>({id:d.id,...d.data()}));
+  if(!firstReq)REQ.forEach(r=>{if(!old.has(r.id)&&r.st==="prep"){toast(`طلب جديد: ${r.brn}`);notify("🚚 توصيلة جديدة",r.brn,"q"+r.id);beep()}});
+  firstReq=false;draw();
+ },()=>toast("تعذر قراءة الطلبات","er")));
+ // الرحلات: الشغّالة حالياً + رحلات اليوم بس (بدل كل الرحلات من أول يوم)
+ const T={a:new Map(),d:new Map()},setT=(k,sn)=>{T[k]=new Map(sn.docs.map(d=>[d.id,{id:d.id,...d.data()}]));const m=new Map(T.d);T.a.forEach((v,id)=>m.set(id,v));TR=[...m.values()];draw()};
+ const terr=()=>toast("تعذر قراءة الرحلات","er"),day0=new Date().setHours(0,0,0,0);
+ un.push(onSnapshot(query(collection(db,"trips"),where("drv","==",me.id),where("st","==","active")),sn=>{if(!sn.metadata.fromCache)trLoaded=true;setT("a",sn)},terr));
+ // محتاج فهرس (drv + start) في Firebase؛ لو لا يزال ماتعملش بنرجع للطريقة القديمة علشان التطبيق مايقفش
+ un.push(onSnapshot(query(collection(db,"trips"),where("drv","==",me.id),where("start",">=",day0)),sn=>setT("d",sn),e=>{
+  if(e&&e.code==="failed-precondition")un.push(onSnapshot(query(collection(db,"trips"),where("drv","==",me.id)),sn=>setT("d",sn),terr));else terr()}));
+}
+function stopAll(){un.forEach(f=>typeof f==="function"&&f());un=[];CARS=[];REQ=[];TR=[];FU=[];off=new Set();odoV=null;clearInterval(tick);liveOff();trLoaded=false}
+// ---------- الواجهة ----------
+// كارت الترحيب للسائق باسمه
+const hi=sub=>window.uiHello?uiHello(me?me.name:"",sub):"";
+function draw(){
+ natSync();if(IOS&&me&&!me.gps&&!gpsTried)ensureGps().then(t=>{if(t)draw()});// آيفون: الرمز بتاع Traccar
+ if(!me||g("md").className.includes("on"))return;
+ const a=active(),mn=g("mn");
+ if(a){
+  const st=Array.isArray(a.stops)?a.stops:[],done=st.filter(s=>s.arr).length,pend=st.filter(s=>!s.arr),ml=mapLink(pend);
+  mn.innerHTML=hi(`رحلة جارية، سلامتك 🚚 سلّمت ${done} من ${st.length}`)+`<div class="card"><h3>🚚 رحلة جارية <span class="pill">${E(a.carn)}</span></h3><div class="kp"><span>بدأت ${hm(a.start)}</span><span id="el">${dur(Date.now()-N(a.start))}</span><span>سلّمت ${done} من ${st.length}</span></div>${NAT?natLine():bgOn(a)?`<div class="mut" style="color:#1f8a3c;font-weight:700">📡 تطبيق التتبع يعمل ✅ يصل مكانك تلقائياً حتى والجوال مغلق، وتعرف الفروع موعد وصولك.</div>`
+   :`<div class="mut">📍 ${me.gps&&!DROID?"تطبيق التتبع (Traccar Client) لم يرسل مكانك بعد. تأكد أنه يعمل (Service status). إلى أن يعمل: ":""}ما دام هذا التطبيق مفتوحاً أمامك نحدّث مكانك والوقت المتوقع للفروع.</div><label class="mut" style="display:flex;gap:8px;align-items:center;margin-top:6px"><input id="wk" type="checkbox" style="width:22px;height:22px" ${wakeOn()?"checked":""}> 🔆 أبقِ الشاشة مضاءة أثناء الرحلة</label>`}${ml?`<a class="b g" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="${E(ml)}" target="_blank" rel="noopener noreferrer">🗺 افتح المسار في خرائط جوجل</a>`:""}</div>
+  ${st.map(s=>{
+    // تحويل بين فرعين: لازم يستلم من الفرع الأول (fr) قبل ما يسلّم للمجدداً
+    const pick=s.fr&&!s.pk&&!s.arr,sh=shipOf(s);
+    return `<div class="stop ${s.arr?"done":""}"><div>${s.fr?`<small style="display:block;color:#1c4f86;font-weight:700">🔄 تحويل: استلم من <bdi dir="ltr">${E(s.frn||s.fr)}</bdi>${s.pk?" ✔ "+hm(s.pk):""}</small>`:""}${sh?`<small style="display:block;color:#1c4f86;font-weight:700">🚚 شحن: سلّمه لشركة ${E(sh)}</small>`:""}<b>${s.fr?"← سلّم لـ ":sh?"← شحن لـ ":""}${E(s.brn)}</b><small><bdi dir="ltr">${E(s.no)}</bdi> · ${N(s.pcs)} قطعة${s.arr?" · ✔ "+hm(s.arr):s.eta?" · متوقع ~"+hm(s.eta):""}</small>${itBtn(s.rid)}${s.arr?(N(s.ct)>0?`<small style="color:var(--ink);font-weight:700">📦 ${N(s.ct)} كرتون</small>`:""):ctBox(s.rid,sh,s.ct||CT[s.rid])}</div>${s.arr?"":pick?`<button class="b" data-pk="${E(s.rid)}" type="button">📦 استلمت من ${E(s.frn||s.fr)}</button>`:`<button class="b ok" data-arr="${E(s.rid)}" type="button">${sh?"سلّمت لشركة الشحن ✅":"وصلت وسلّمت ✅"}</button>`}</div>`}).join("")}
+  ${(()=>{// توصيلات اتعيّنت له بعد ما بدأ الرحلة: بتظهر هنا ويضيفها للرحلة (بدل ما تستخبى إلى ما ينهي)
+    const nw=REQ.filter(r=>r.st==="prep"&&!st.some(s=>s.rid===r.id));if(!nw.length)return "";
+    return `<div class="card" style="border:2px solid var(--acc)"><h3>📦 ${nw.length===1?"توصيلة جديدة عُيّنت لك":nw.length+" توصيلات جديدة عُيّنت لك"}</h3>${nw.map(r=>`<div class="mut" style="padding:4px 0">${r.tr?`🔄 استلم من <bdi dir="ltr">${E(r.tr.frn)}</bdi> ← `:""}<b style="direction:ltr;display:inline-block;color:var(--ink)">${E(r.brn)}</b> · ${N(r.pcs)} قطعة</div>`).join("")}<button class="b g" id="badd" type="button" style="margin-top:8px">➕ أضفها إلى هذه الرحلة</button></div>`})()}
+  <div class="row"><button class="b" id="bf" type="button">⛽ بنزين</button><button class="b p" id="be" type="button">🏁 إنهاء الرحلة</button></div>`;
+  g("bf").onclick=fuelForm;g("be").onclick=endForm;if(g("badd"))g("badd").onclick=()=>addToTrip(g("badd"));
+  mn.querySelectorAll("[data-arr]").forEach(b=>b.onclick=()=>podForm(b.dataset.arr));mn.querySelectorAll("[data-pk]").forEach(b=>b.onclick=()=>pickUp(b.dataset.pk,b));mn.querySelectorAll("[data-ct]").forEach(i=>i.onchange=()=>saveCt(i));wireIt(mn);wireNat(mn);
+  clearInterval(tick);tick=setInterval(()=>{const e=g("el"),t=active();if(e&&t)e.textContent=dur(Date.now()-N(t.start))},30000);
+  liveOn();if(g("wk"))g("wk").onchange=()=>{lsSet("drv_wake",g("wk").checked?"1":"0");if(g("wk").checked)wake();else if(LIVE.lock){LIVE.lock.release().catch(()=>{});LIVE.lock=null}};
+  return;
+ }
+ clearInterval(tick);liveOff();
+ const rs=REQ.filter(r=>r.st==="prep").sort((a,b)=>N(a.ts)-N(b.ts));
+ const lastCar=lsGet("drv_car")||"",cid=CARS.some(c=>c.id===lastCar)?lastCar:(CARS[0]&&CARS[0].id)||"";
+ const dayTr=TR.filter(t=>t.st==="done"&&new Date(N(t.start)).toLocaleDateString("en-CA")===today()).sort((a,b)=>N(b.start)-N(a.start));
+ mn.innerHTML=hi(rs.length?`لديك ${rs.length} توصيلة بانتظارك 📦`:"لا توجد توصيلات حالياً، سيرسل لك المستودع فور التجهيز")+`<div class="card"><h3>رحلة جديدة</h3>
+ <label>السيارة</label><select id="sc">${CARS.map(c=>`<option value="${E(c.id)}" ${c.id===cid?"selected":""}>${E(c.name)} ${E(c.plate||"")}</option>`).join("")||'<option value="">لا توجد سيارات — تواصل مع المستودع</option>'}</select>
+ <label>قراءة العداد الآن (كم) *${lastCarOdo(cid)?` — آخر قراءة مسجّلة ${lastCarOdo(cid)}`:""}</label><input id="so" inputmode="numeric" autocomplete="off" value="${E(odoV!==null?odoV:"")}" placeholder="انظر إلى العداد واكتب الرقم">
+ <label>التوصيلات (${rs.length}) — يُضبط الترتيب تلقائياً على أقرب مسار</label>${rs.length?rs.map(r=>`<label class="pick"><input type="checkbox" data-r="${E(r.id)}" ${off.has(r.id)?"":"checked"}><span style="flex:1">${r.tr?`<small style="display:block;color:#1c4f86;font-weight:700">🔄 تحويل: استلم من <bdi dir="ltr">${E(r.tr.frn)}</bdi> ${N(r.rdy)?"✅ جاهز":"⏳ لا يزال قيد التجهيز"}</small>`:""}${shipOf(r)?`<small style="display:block;color:#1c4f86;font-weight:700">🚚 شحن: تسلّمه لشركة ${E(shipOf(r))}</small>`:""}<b style="direction:ltr;display:inline-block">${E(r.brn)}</b><small class="mut" style="display:block"><bdi dir="ltr">${E(r.no)}</bdi> · ${N(r.codes)} صنف · ${N(r.pcs)} قطعة</small>${ctBox(r.id,shipOf(r),CT[r.id])}</span>${itBtn(r.id)}</label>`).join(""):'<div class="mut">لا توجد توصيلات معيّنة لك حالياً. انتظر تعيين المستودع.</div>'}
+ <button class="b g" id="bs" type="button" style="margin-top:10px" ${rs.length?"":"disabled"}>🚚 ابدأ الرحلة</button></div>
+ <div class="row" style="margin:0 0 14px"><button class="b" id="bf" type="button">⛽ تسجيل بنزين</button></div>
+ ${dayTr.length?`<div class="card"><h3>رحلات اليوم</h3>${dayTr.map(t=>`<div class="mut" style="padding:6px 0;border-bottom:1px solid var(--line)">${hm(t.start)} ← ${hm(t.end)} · ${dur(N(t.end)-N(t.start))} · ${Math.max(0,N(t.odo1)-N(t.odo0))} كم · ${(t.stops||[]).filter(s=>s.arr).length} توصيلة</div>`).join("")}</div>`:""}`;
+ g("sc").onchange=()=>{lsSet("drv_car",g("sc").value);odoV=null;draw()};g("so").oninput=()=>{odoV=g("so").value};
+ mn.querySelectorAll("[data-r]").forEach(c=>c.onchange=()=>{c.checked?off.delete(c.dataset.r):off.add(c.dataset.r)});
+ mn.querySelectorAll("[data-ct]").forEach(i=>i.oninput=()=>{const v=ctV(i.value);if(v)CT[i.dataset.ct]=v;else delete CT[i.dataset.ct];ctSave()});
+ mn.insertAdjacentHTML("beforeend",gpsCard());wireCpy(mn);wireNat(mn);
+ g("bf").onclick=fuelForm;g("bs").onclick=startTrip;wireIt(mn);
+}
+// محتوى الطلب (الأصناف والكميات) علشان السائق يراجع وهو بيحمّل
+const itBtn=rid=>{const r=REQ.find(x=>x.id===rid);return r&&Array.isArray(r.rows)&&r.rows.length?`<button class="b it" data-it="${E(rid)}" type="button">📋 الأصناف</button>`:""};
+const wireIt=el=>el.querySelectorAll("[data-it]").forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();items(b.dataset.it)});
+function items(rid){
+ const r=REQ.find(x=>x.id===rid);if(!r)return;const rows=(Array.isArray(r.rows)?r.rows:[]).filter(x=>x&&x.k&&!x.na);const by={};
+ rows.forEach(x=>{(by[x.k]=by[x.k]||[]).push(x)});
+ openM(`<h3>📋 أصناف <span style="direction:ltr;display:inline-block">${E(r.brn)}</span></h3><div class="mut"><bdi dir="ltr">${E(r.no)}</bdi> · ${N(r.codes)} صنف · ${N(r.pcs)} قطعة</div>
+ <div style="max-height:60vh;overflow:auto;margin:10px 0">${Object.entries(by).map(([k,xs])=>`<div class="itg"><b dir="ltr">${E(k)}</b>${xs.map(x=>`<div class="itr"><span>${E([x.c,x.z].filter(Boolean).join(" · ")||"—")}${x.n?`<small class="mut" style="display:block">${E(x.n)}</small>`:""}</span><b>${N(x.q)}</b></div>`).join("")}</div>`).join("")||'<div class="mut">لا توجد أصناف مسجّلة.</div>'}</div>
+ ${r.gn?`<div class="kp"><span>ملاحظات: ${E(r.gn)}</span></div>`:""}<button class="b p" id="ix" type="button">إغلاق</button>`);
+ g("ix").onclick=closeM;
+}
+async function startTrip(){
+ const c=CARS.find(x=>x.id===g("sc").value),odo=N(toEn(g("so").value)),sel=REQ.filter(r=>r.st==="prep"&&!off.has(r.id)).slice(0,30);
+ if(!c){toast("اختر السيارة","er");return}
+ if(!(odo>0)){toast("اكتب قراءة العداد الموجودة في السيارة حالياً","er");return}
+ const lo0=lastCarOdo(c.id);if(lo0&&odo<lo0){toast(`يجب أن تكون قراءة العداد ${lo0} أو أكثر (آخر قراءة لهذه السيارة)`,"er");return}
+ if(lo0&&odo-lo0>MAXLEG){toast(`الرقم كبير جداً (${odo-lo0} كم من آخر قراءة). راجع العداد`,"er");return}
+ if(!sel.length){toast("اختر توصيلة واحدة على الأقل","er");return}
+ g("bs").disabled=true;g("bs").textContent="جاري تحديد الموقع...";
+ // الوقت المتوقع من مكانه الحقيقي حالياً (والتحويل بيعدّي على الفرع اللي هيستلم منه)
+ const loc=await here(),ts=Date.now(),rs=order(sel,loc),et=etas(rs.map(r=>({rid:r.id,brn:r.brn,fr:r.tr&&r.tr.fr,pk:N(r.pk)})),ts,"WH",loc);
+ try{
+  const b=writeBatch(db),tr=doc(collection(db,"trips")),t={drv:me.id,drvn:me.name,car:c.id,carn:c.name+(c.plate?" "+c.plate:""),st:"active",start:ts,odo0:odo,stops:rs.map(r=>{const s={rid:r.id,no:String(r.no||"").slice(0,40),brn:String(r.brn||"").slice(0,40),pcs:N(r.pcs)};if(et[r.id])s.eta=et[r.id];const ct0=ctV(CT[r.id]);if(ct0)s.ct=ct0;
+    if(r.tr&&r.tr.fr){s.fr=String(r.tr.fr).slice(0,3);s.frn=String(r.tr.frn||"").slice(0,40);if(N(r.pk))s.pk=N(r.pk)}// تحويل: يستلم من الفرع ده الأول
+    return s})};
+  if(loc){t.loc0=loc;t.loc={...loc,ts}}
+  b.set(tr,t);rs.forEach(r=>{const u={st:"go",dep:ts,upd:ts};if(et[r.id])u.eta=et[r.id];b.update(doc(db,"requests",r.id),u)});
+  await withTimeout(b.commit(),15000);ping(auth,rs.map(r=>r.id),[],[tr.id]);LIVE.last=ts;LIVE.lastPt=loc;lsSet("drv_car",c.id);lsSet("drv_odo_"+c.id,String(odo));odoV=null;toast("بدأت الرحلة. سلامتك 🚚");
+ }catch(e){const x=g("bs");if(x){x.disabled=false;x.textContent="🚚 ابدأ الرحلة"}fail(e,"غير مسموح. ربما غيّر المستودع الطلب.")}
+}
+// إضافة توصيلات للرحلة الشغّالة (اتعيّنت بعد ما بدأ): بتتحط بعد اللي لا يزال ماسلّمهاش بترتيب الأقرب، والوقت المتوقع بيتحسب من مكانه حالياً
+async function addToTrip(btn){
+ const a=active();if(!a)return;const st=Array.isArray(a.stops)?a.stops:[];
+ const nw=REQ.filter(r=>r.st==="prep"&&!st.some(s=>s.rid===r.id)).slice(0,Math.max(0,30-st.length));
+ if(!nw.length){toast("لا توجد توصيلات جديدة","er");return}
+ btn.disabled=true;btn.textContent="جاري الإضافة...";
+ const loc=await here(),ts=Date.now(),last=[...st].reverse().find(s=>s.arr),from=loc||(last&&GEO.br[codeOf(last.brn)])||GEO.wh;
+ const add=order(nw,from).map(r=>{const s={rid:r.id,no:String(r.no||"").slice(0,40),brn:String(r.brn||"").slice(0,40),pcs:N(r.pcs)};if(r.tr&&r.tr.fr){s.fr=String(r.tr.fr).slice(0,3);s.frn=String(r.tr.frn||"").slice(0,40);if(N(r.pk))s.pk=N(r.pk)}const ct1=ctV(CT[r.id]);if(ct1)s.ct=ct1;return s});
+ const all=[...st,...add],pend=all.filter(s=>!s.arr),et=etas(pend,ts,loc?null:(last?codeOf(last.brn):"WH"),loc);
+ try{
+  const b=writeBatch(db);b.update(doc(db,"trips",a.id),{stops:all.map(s=>!s.arr&&et[s.rid]?{...s,eta:et[s.rid]}:s)});
+  add.forEach(s=>{const u={st:"go",dep:ts,upd:ts};if(et[s.rid])u.eta=et[s.rid];b.update(doc(db,"requests",s.rid),u)});
+  await withTimeout(b.commit(),15000);ping(auth,add.map(s=>s.rid));toast(`حسناً ✅ أُضيفت ${add.length} توصيلة للرحلة`);
+ }catch(e){btn.disabled=false;btn.textContent="➕ أضفها إلى هذه الرحلة";fail(e,"غير مسموح. ربما غيّر المستودع الطلب.")}
+}
+// عدد الكراتين لطلب أثناء الرحلة (اختياري): بيتحفظ على محطة الرحلة
+async function saveCt(i){
+ const a=active();if(!a)return;const rid=i.dataset.ct,v=ctV(i.value);if(v)CT[rid]=v;else delete CT[rid];ctSave();
+ const st=(a.stops||[]).map(x=>{if(x.rid!==rid)return x;if(v)return {...x,ct:v};const {ct,...o}=x;return o});
+ try{const b=writeBatch(db);b.update(doc(db,"trips",a.id),{stops:st});await withTimeout(b.commit(),15000);toast(v?"تم حفظ عدد الكراتين ✅":"تم مسح العدد")}catch(e){fail(e,"تعذر حفظ عدد الكراتين")}
+}
+// تحويل: السائق استلم البضاعة من الفرع اللي بيبعت (pk على الطلب وعلى محطة الرحلة)
+async function pickUp(rid,btn){
+ const a=active();if(!a)return;const s=(a.stops||[]).find(x=>x.rid===rid);if(!s)return;
+ if(!confirm(`استلمت التحويل من ${s.frn||s.fr}؟`))return;
+ btn.disabled=true;const ts=Date.now(),loc=await here();// مكان الاستلام (بيظهر على خريطة الرحلة في المستودع)
+ try{
+  const b=writeBatch(db);b.update(doc(db,"trips",a.id),{stops:(a.stops||[]).map(x=>x.rid===rid?{...x,pk:ts,...(loc?{plat:loc.lat,plng:loc.lng}:{})}:x)});b.update(doc(db,"requests",rid),{pk:ts,upd:ts});
+  await withTimeout(b.commit(),15000);ping(auth,[rid]);toast("حسناً 📦 الآن أوصله إلى "+s.brn);
+ }catch(e){btn.disabled=false;fail(e,"غير مسموح. ربما غيّر المستودع التحويل.")}
+}
+// ---------- نوافذ ----------
+const openM=h=>{g("md").innerHTML=`<div class="card">${h}</div>`;g("md").className="mdl on"};
+const closeM=()=>{g("md").className="mdl";g("md").innerHTML="";draw()};
+// تسليم: اسم المستلم + توقيع + صورة
+// آخر قراءة معروفة للسيارة (من الجهاز ده أو من رحلات اليوم): العداد عمره ما بيرجع لورا
+function lastCarOdo(car){if(!car)return 0;let m=N(lsGet("drv_odo_"+car));TR.forEach(t=>{if(t.car===car){m=Math.max(m,N(t.odo0),N(t.odo1));(t.stops||[]).forEach(s=>{m=Math.max(m,N(s.odo))})}});return m}
+// آخر قراءة عداد في الرحلة (البداية أو آخر تسليم): كل قراءة لازم تكون أكبر منها أو زيها
+const lastOdo=a=>Math.max(N(a.odo0),...(a.stops||[]).map(s=>N(s.odo)));
+const MAXLEG=1500;// أكبر رحلة قصيرة معقول بين قراءتين (كم) علشان خطأ كتابة (رقم زيادة) ماتبوّظش الحساب
+function podForm(rid){
+ const a=active();if(!a)return;const s=(a.stops||[]).find(x=>x.rid===rid);if(!s)return;let img="",busy=false,drawn=false;const lo=lastOdo(a);
+ const sh=shipOf(s);
+ openM(`<h3>${sh?`🚚 تسليم لشركة الشحن — ${E(sh)}`:`تسليم — <span style="direction:ltr;display:inline-block">${E(s.brn)}</span>`}</h3>${sh?`<div class="mut" style="margin-bottom:6px">هذا الطلب لفرع <bdi dir="ltr">${E(s.brn)}</bdi> (خارج الرياض). تسلّمه لشركة الشحن وهي التي توصله للفرع.</div>`:""}
+ <label>قراءة العداد الآن (كم) — آخر قراءة ${lo}</label><input id="po" inputmode="numeric" autocomplete="off" placeholder="مثلاً ${lo+8}">
+ <small class="mut">لنحسب كيلومترات كل فرع بالضبط</small>
+ <label>📦 عدد الكراتين ${sh?"لشركة الشحن":"للفرع"} (اختياري)</label><input id="pct" inputmode="numeric" autocomplete="off" placeholder="0" value="${N(s.ct)||CT[rid]||""}">
+ <label>${sh?"اسم موظف شركة الشحن الذي استلم":"اسم المستلم في الفرع"}</label><input id="pn" maxlength="60" autocomplete="off" placeholder="مثلاً: أحمد محمد">
+ <label>توقيع المستلم (بإصبعك)</label><canvas id="pc" width="320" height="130" style="width:100%;height:130px;background:#fff;border:1.5px dashed var(--line);border-radius:12px;touch-action:none"></canvas><button class="b" id="pcl" type="button" style="margin-top:6px;padding:8px">مسح التوقيع</button>
+ ${sh?`<label>رقم البوليصة / الشحنة (من إيصال الشركة)</label><input id="pw" maxlength="40" autocomplete="off" dir="ltr" placeholder="مثلاً: 1234567890">`:""}
+ <label>${sh?"صورة إيصال الشحن (مطلوبة إن لم يوجد رقم بوليصة)":"صورة البضاعة / التسليم (اختياري)"}</label><input id="pf" type="file" accept="image/*"><small class="mut" id="ph"></small>
+ <div class="row"><button class="b" id="p0" type="button">رجوع</button><button class="b ok" id="p1" type="button">تأكيد التسليم ✅</button></div>`);
+ const cv=g("pc"),cx=cv.getContext("2d");cx.lineWidth=2.4;cx.lineCap="round";cx.strokeStyle="#111";let dn=false;
+ const pt=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+ cv.onpointerdown=e=>{dn=true;drawn=true;const [x,y]=pt(e);cx.beginPath();cx.moveTo(x,y);cx.lineTo(x+.1,y+.1);cx.stroke();try{cv.setPointerCapture(e.pointerId)}catch(x){}};
+ cv.onpointermove=e=>{if(!dn)return;const [x,y]=pt(e);cx.lineTo(x,y);cx.stroke()};
+ cv.onpointerup=cv.onpointercancel=()=>{dn=false};
+ g("pcl").onclick=()=>{cx.clearRect(0,0,cv.width,cv.height);drawn=false};
+ g("pf").onchange=async()=>{const f=g("pf").files[0];img="";if(!f)return;busy=true;g("ph").textContent="جاري ضغط الصورة...";try{img=await shrink(f,800,120000);g("ph").textContent="تم تجهيز الصورة ✅"}catch(e){g("pf").value="";g("ph").textContent="الصورة غير صالحة"}busy=false};
+ g("p0").onclick=closeM;
+ g("p1").onclick=async()=>{
+  const od=N(toEn(g("po").value));
+  if(!(od>0)){toast("اكتب قراءة العداد","er");return}
+  if(od<lo){toast(`يجب أن تكون قراءة العداد ${lo} أو أكثر (آخر قراءة)`,"er");return}
+  if(od-lo>MAXLEG){toast(`الرقم كبير جداً (${od-lo} كم من آخر قراءة). راجع العداد`,"er");return}
+  const wb=sh&&g("pw")?g("pw").value.trim().slice(0,40):"";
+  if(sh&&!wb&&!img){toast("اكتب رقم البوليصة أو صوّر إيصال شركة الشحن","er");return}
+  const nm=g("pn").value.trim();if(!nm){toast("اكتب اسم المستلم","er");return}
+  if(busy){toast("انتظر حتى تنتهي الصورة","er");return}
+  g("p1").disabled=true;g("p1").textContent="جاري الحفظ...";
+  const ts=Date.now(),loc=await here();let pod={name:nm.slice(0,60),at:ts},pics=null;if(sh){pod.co=String(sh).slice(0,60);if(wb)pod.wb=wb}// تسليم لشركة الشحن: اسم الشركة ورقم البوليصة
+  if(drawn){const sg=cv.toDataURL("image/png");if(sg.length<=40000)(pics=pics||{}).sig=sg}
+  if(img)(pics=pics||{}).img=img;
+  try{
+   // الصورة والتوقيع في مستند لوحده (pods/{رقم الطلب})، مش جوه الطلب: الطلب بيتقري مع كل فتحة للوحة،
+   // ولو الصور جوّاه كانت حصة النقل المجانية في Firebase هتخلص والمنصة تقف. على الطلب علامة بس (ph/sg).
+   // لو القواعد اللي في Firebase لا يزال قديمة (مابتعرفش pods) بنرجع للطريقة القديمة علشان التسليم مايقفش.
+   if(pics){
+    try{await withTimeout(setDoc(doc(db,"pods",rid),{...pics,at:ts,drv:me.id}),15000);if(pics.img)pod.ph=1;if(pics.sig)pod.sg=1}
+    catch(e){if(e&&e.code==="permission-denied")pod={...pod,...pics};else throw e}
+   }
+   const st=(a.stops||[]).map(x=>{if(x.rid!==rid)return x;const o={...x,arr:ts,rcvr:nm.slice(0,60),odo:od};const ct2=ctV(g("pct")?g("pct").value:"");if(ct2)o.ct=ct2;if(loc){o.lat=loc.lat;o.lng=loc.lng}return o});
+   const rem=st.filter(x=>!x.arr),et=etas(rem,ts,codeOf(s.brn));// الباقي محسوب من الفرع اللي سُلِّم حالياً
+   const stt=st.map(x=>et[x.rid]?{...x,eta:et[x.rid]}:x);
+   const b=writeBatch(db),tu={stops:stt};if(loc)tu.loc={...loc,ts};
+   // ⚠️ (نوفمبر 2026) طلب اتمسح من المستودع وهو في الرحلة: مانكتبش عليه (كان بيرفض التسليم كله والرحلة بتعلق). REQ = طلباتي الموجودة فعلاً
+   const has=x=>REQ.some(r=>r.id===x);
+   b.update(doc(db,"trips",a.id),tu);if(has(rid))b.update(doc(db,"requests",rid),{st:"done",dlv:ts,upd:ts,pod});
+   rem.forEach(x=>{if(et[x.rid]&&has(x.rid))b.update(doc(db,"requests",x.rid),{eta:et[x.rid]})});
+   await withTimeout(b.commit(),15000);delete CT[rid];ctSave();ping(auth,[rid]);closeM();lsSet("drv_odo_"+a.car,String(od));
+   // آخر فرع: نفكّره ينهي الرحلة لما يرجع (علشان رحلة قصيرة الرجوع يتحسب)
+   toast(rem.length?"تم تسجيل التسليم ✅":"تم التسليم ✅ أنهيت كل التوصيلات. عند عودتك إلى المستودع اضغط 🏁 إنهاء الرحلة واكتب العداد");
+  }catch(e){const x=g("p1");if(x){x.disabled=false;x.textContent="تأكيد التسليم ✅"}fail(e,"غير مسموح. ربما غيّر المستودع حالة الطلب.")}
+ };
+}
+function fuelForm(){
+ const a=active(),cid=a?a.car:(g("sc")&&g("sc").value)||lsGet("drv_car")||"",c=CARS.find(x=>x.id===cid)||CARS[0];
+ openM(`<h3>⛽ تسجيل بنزين</h3><label>السيارة</label><select id="fcar">${CARS.map(x=>`<option value="${E(x.id)}" ${c&&x.id===c.id?"selected":""}>${E(x.name)}</option>`).join("")}</select>
+ <label>اللترات</label><input id="fl" inputmode="decimal"><label>المبلغ</label><input id="fm" inputmode="decimal"><label>قراءة العداد (كم)</label><input id="fo" inputmode="numeric" value="${E(a?"":lsGet("drv_odo_"+(c?c.id:""))||"")}">
+ <label style="display:flex;gap:10px;align-items:center"><input id="ff" type="checkbox" style="width:24px;height:24px"> ملأت الخزان بالكامل</label>
+ <div class="row"><button class="b" id="f0" type="button">رجوع</button><button class="b p" id="f1" type="button">حفظ</button></div>`);
+ g("f0").onclick=closeM;
+ g("f1").onclick=async()=>{
+  const cc=CARS.find(x=>x.id===g("fcar").value),l=N(toEn(g("fl").value)),m=N(toEn(g("fm").value)),o=N(toEn(g("fo").value));
+  if(!cc||!(l>0)||l>500||m<0||!(o>0)){toast("اكتب اللترات والمبلغ والعداد","er");return}
+  g("f1").disabled=true;
+  try{await withTimeout(addDoc(collection(db,"fuel"),{drv:me.id,drvn:me.name,car:cc.id,carn:cc.name,ts:Date.now(),dt:today(),liters:l,cost:m,odo:o,full:g("ff").checked}),15000);lsSet("drv_odo_"+cc.id,String(o));closeM();toast("تم تسجيل البنزين ✅")}
+  catch(e){g("f1").disabled=false;fail(e,"غير مسموح بالتسجيل.")}
+ };
+}
+function endForm(){
+ const a=active();if(!a)return;const un2=(a.stops||[]).filter(s=>!s.arr),lo=lastOdo(a);
+ openM(`<h3>🏁 إنهاء الرحلة</h3>${un2.length?`<div class="mut" style="color:#c4362b;font-weight:700">يوجد ${un2.length} توصيلة لم تُسلَّم بعد (${un2.map(s=>E(s.brn)).join("، ")}) — سترجع إلى المستودع.</div>`:""}
+ <label>قراءة العداد الآن (كم) — ${lo>N(a.odo0)?`آخر قراءة ${lo} (كانت ${N(a.odo0)} في البداية)`:`كانت ${N(a.odo0)} في البداية`}</label><input id="eo" inputmode="numeric"><label>ملاحظة (اختياري)</label><input id="en" maxlength="300">
+ <div class="row"><button class="b" id="e0" type="button">رجوع</button><button class="b p" id="e1" type="button">إنهاء</button></div>`);
+ g("e0").onclick=closeM;
+ g("e1").onclick=async()=>{
+  const o=N(toEn(g("eo").value));if(!(o>=lo)||o>9999999){toast("يجب أن تكون قراءة العداد "+lo+" أو أكثر (آخر قراءة)","er");return}
+  if(o-lo>MAXLEG){toast(`الرقم كبير جداً (${o-lo} كم من آخر قراءة). راجع العداد`,"er");return}
+  g("e1").disabled=true;const ts=Date.now(),loc=await here();
+  try{
+   const b=writeBatch(db),u={st:"done",end:ts,odo1:o},n=g("en").value.trim().slice(0,300);if(n)u.note=n;if(loc)u.loc={...loc,ts};
+   // (الطلب اللي اتمسح من المستودع وهو في الرحلة بيتساب: من غيرها الرحلة مابتتقفلش خالص)
+   b.update(doc(db,"trips",a.id),u);un2.filter(s=>REQ.some(r=>r.id===s.rid)).forEach(s=>b.update(doc(db,"requests",s.rid),{st:"prep",upd:ts}));
+   await withTimeout(b.commit(),15000);ping(auth,un2.map(s=>s.rid),[],[a.id]);lsSet("drv_odo_"+a.car,String(o));closeM();toast("تم إنهاء الرحلة. شكراً لجهدك 👏");
+  }catch(e){g("e1").disabled=false;fail(e,"غير مسموح بإنهاء الرحلة.")}
+ };
+}
+regSW();
+</script>
+<script>if(/\/[^\/]*beta[^\/]*\//i.test(location.pathname))document.write('<div id="tz-beta" style="position:fixed;bottom:8px;left:8px;z-index:99999;background:#6a56c9;color:#fff;font:700 12px/1 Tahoma,sans-serif;padding:7px 12px;border-radius:999px;pointer-events:none;opacity:.92;box-shadow:0 6px 18px rgba(0,0,0,.25)">🧪 نسخة تجريبية — Supabase</div>')</script></body>
+</html>
